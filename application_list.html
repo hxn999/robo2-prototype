@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Application - Corporate Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                            accent: '#CA8A04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen pb-10">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
+        <div class="px-4 py-4 flex items-center">
+            <a href="home.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+            <h1 class="ml-2 text-lg font-bold text-gray-900">Choose Application Type</h1>
+        </div>
+    </header>
+
+    <main class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <!-- Application Item 1 -->
+            <a href="application_form.html?type=Leave%20Request"
+                class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
+                <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 group-hover:text-blue-700 transition-colors">Leave Request</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Annual, Sick, or Casual leave applications.</p>
+                </div>
+            </a>
+
+            <!-- Application Item 2 -->
+            <a href="application_form.html?type=Expense%20Reimbursement"
+                class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
+                <div class="p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 group-hover:text-green-700 transition-colors">Expense Claim</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Travel, medical, or other professional expenses.</p>
+                </div>
+            </a>
+
+            <!-- Application Item 3 -->
+            <a href="application_form.html?type=IT%20Service%20Request"
+                class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
+                <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">IT Service Request
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Software installation, hardware issues, or access.</p>
+                </div>
+            </a>
+
+            <!-- Application Item 4 -->
+            <a href="application_form.html?type=Stationery%20Indent"
+                class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
+                <div class="p-3 bg-amber-50 text-amber-600 rounded-xl group-hover:bg-amber-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 group-hover:text-amber-700 transition-colors">Stationery Indent
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Request for office supplies and materials.</p>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

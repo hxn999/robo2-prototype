@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - Corporate Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-active {
+            border-bottom: 2px solid #0f172a;
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .tab-inactive {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* FAB Speed Dial Animation */
+        .fab-options {
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: bottom right;
+        }
+
+        .fab-options.open {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .fab-icon {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .fab-active .fab-icon {
+            transform: rotate(45deg);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                            accent: '#CA8A04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen pb-24 relative">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
+        <div class="px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="home.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
+                <h1 class="ml-2 text-lg font-bold text-gray-900">DMS</h1>
+            </div>
+
+            <div class="flex items-center space-x-1">
+                <!-- View Toggle (List/Grid) -->
+                <button id="view-toggle" onclick="toggleView()" class="p-2 text-gray-500 hover:text-gray-900">
+                    <svg id="icon-grid" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    <svg id="icon-list" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <!-- Search Icon -->
+                <button class="p-2 text-gray-500 hover:text-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-gray-200 bg-white px-2">
+            <button id="tab-my-docs" onclick="switchTab('my-docs')"
+                class="flex-1 py-3 text-sm text-center tab-active transition-colors">
+                My Document
+            </button>
+            <button id="tab-pending" onclick="switchTab('pending')"
+                class="flex-1 py-3 text-sm text-center tab-inactive transition-colors">
+                Pending Document
+            </button>
+        </div>
+
+        <!-- Breadcrumbs (Only relevant for My Docs usually, but keeping global for now) -->
+        <div id="breadcrumbs"
+            class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs text-gray-500 flex items-center space-x-1">
+            <span class="hover:underline cursor-pointer">Root</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-300" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span class="font-medium text-gray-900">Corporate Polic...</span>
+        </div>
+    </header>
+
+    <main class="text-sm">
+
+        <!-- My Documents View -->
+        <div id="view-my-docs" class="flex flex-col">
+            <!-- Folder Item -->
+            <div
+                class="doc-item flex items-center justify-between p-4 bg-white border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition-colors group">
+                <div class="flex items-center space-x-3 w-full">
+                    <div class="text-yellow-400 flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                        </svg>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 class="font-medium text-gray-900 group-hover:text-blue-700 truncate">Financial Reports</h3>
+                        <p class="text-[10px] text-gray-400">Changed 2 days ago</p>
+                    </div>
+                </div>
+                <button
+                    class="action-btn-list ml-2 p-2 rounded-full text-gray-300 hover:bg-gray-100 hover:text-gray-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- File Item (PDF) -->
+            <div
+                class="doc-item flex items-center justify-between p-4 bg-white border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                <div class="flex items-center space-x-3 w-full">
+                    <div class="text-red-500 bg-red-50 p-2 rounded-lg flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 class="font-medium text-gray-900 filename truncate">Q3_Budget_Review.pdf</h3>
+                        <p class="text-[10px] text-gray-400">2.4 MB &middot; Jun 12, 2024</p>
+                    </div>
+                </div>
+                <button
+                    class="action-btn text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- File Item (Excel) -->
+            <div
+                class="doc-item flex items-center justify-between p-4 bg-white border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                <div class="flex items-center space-x-3 w-full">
+                    <div class="text-green-600 bg-green-50 p-2 rounded-lg flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 class="font-medium text-gray-900 filename truncate">Employee_List_2025.xlsx</h3>
+                        <p class="text-[10px] text-gray-400">145 KB &middot; Yesterday</p>
+                    </div>
+                </div>
+                <button
+                    class="action-btn text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Pending Documents View (Hidden by default) -->
+        <div id="view-pending" class="hidden p-4 space-y-4">
+            <!-- Scan / Gallery buttons REMOVED -->
+
+            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wide pt-2">Ready to Upload</h2>
+
+            <!-- Pending List -->
+            <div class="space-y-3">
+                <!-- Item 1 -->
+                <div class="bg-white rounded-lg p-3 shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="h-10 w-10 bg-gray-200 rounded overflow-hidden">
+                            <!-- Placeholder for thumbnail -->
+                            <div
+                                class="h-full w-full bg-gray-300 flex items-center justify-center text-gray-500 text-xs">
+                                IMG</div>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-900">Scan_Oct12.jpg</h3>
+                            <p class="text-xs text-brand-accent">Pending Metadata</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Speed Dial FAB Container -->
+    <div class="fixed bottom-6 right-6 z-30 flex flex-col items-end space-y-3">
+
+        <!-- Secondary Options (Hidden by default) -->
+        <div id="fab-options" class="fab-options flex flex-col space-y-3 items-end pr-1">
+
+            <!-- Option 1: From Device -->
+            <div class="flex items-center space-x-3">
+                <span class="text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow-sm">From Device</span>
+                <button
+                    class="w-10 h-10 bg-white text-gray-600 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 border border-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Option 2: Add Folder -->
+            <div class="flex items-center space-x-3">
+                <span class="text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow-sm">New Folder</span>
+                <button
+                    class="w-10 h-10 bg-white text-gray-600 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 border border-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Option 3: Camera -->
+            <div class="flex items-center space-x-3">
+                <span class="text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow-sm">Scan</span>
+                <button
+                    class="w-10 h-10 bg-white text-gray-600 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 border border-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Main FAB -->
+        <button id="fab-main" onclick="toggleFab()"
+            class="bg-brand-900 text-white p-4 rounded-2xl shadow-xl hover:bg-brand-800 active:scale-95 transition-all outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 fab-icon" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="action-overlay" class="fixed inset-0 bg-black/50 z-30 hidden opacity-0 transition-opacity duration-300">
+    </div>
+
+    <!-- Action Sheet -->
+    <div id="action-sheet"
+        class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl z-40 transform translate-y-full transition-transform duration-300 p-6 shadow-2xl">
+        <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+
+        <h3 id="selected-file-name" class="text-sm font-bold text-gray-900 mb-6 text-center truncate">Selected Document
+        </h3>
+
+        <div class="space-y-2">
+            <button
+                class="w-full flex items-center p-3 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors text-left">
+                <div class="bg-blue-50 text-blue-600 p-2 rounded-lg mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Share Document</span>
+            </button>
+
+            <button
+                class="w-full flex items-center p-3 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors text-left">
+                <div class="bg-yellow-50 text-yellow-600 p-2 rounded-lg mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Checkout / Lock</span>
+            </button>
+
+            <div class="border-t border-gray-100 my-2"></div>
+
+            <button
+                class="w-full flex items-center p-3 rounded-xl hover:bg-red-50 active:bg-red-100 transition-colors text-left text-red-600">
+                <div class="bg-red-50 text-red-500 p-2 rounded-lg mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </div>
+                <span class="text-sm font-medium">Delete</span>
+            </button>
+
+            <button id="cancel-btn"
+                class="w-full p-3 rounded-xl text-center text-gray-400 text-sm mt-2 hover:bg-gray-50">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const actionBtns = document.querySelectorAll('.action-btn');
+        const sheet = document.getElementById('action-sheet');
+        const overlay = document.getElementById('action-overlay');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const title = document.getElementById('selected-file-name');
+
+        let isGridView = false;
+
+        // View Toggle Logic
+        function toggleView() {
+            isGridView = !isGridView;
+            const container = document.getElementById('view-my-docs');
+            const iconGrid = document.getElementById('icon-grid');
+            const iconList = document.getElementById('icon-list');
+            const items = document.querySelectorAll('.doc-item');
+
+            if (isGridView) {
+                // Switch to Grid
+                // Container: grid grid-cols-2 gap-4
+                container.classList.remove('flex', 'flex-col');
+                container.classList.add('grid', 'grid-cols-2', 'gap-4', 'p-4');
+
+                // Show List Icon (to switch back)
+                iconGrid.classList.add('hidden');
+                iconList.classList.remove('hidden');
+
+                // Update Items for Grid
+                items.forEach(item => {
+                    item.classList.remove('flex', 'items-center', 'justify-between', 'border-b', 'border-gray-100');
+                    item.classList.add('flex-col', 'items-start', 'border', 'border-gray-100', 'rounded-xl', 'shadow-sm', 'h-40', 'justify-between');
+
+                    // Adjust internal layout if needed (simplistic approach here)
+                });
+            } else {
+                // Switch to List
+                // Container: flex flex-col
+                container.classList.add('flex', 'flex-col');
+                container.classList.remove('grid', 'grid-cols-2', 'gap-4', 'p-4');
+
+                // Show Grid Icon (to switch to grid)
+                iconList.classList.add('hidden');
+                iconGrid.classList.remove('hidden');
+
+                // Update Items for List
+                items.forEach(item => {
+                    item.classList.add('flex', 'items-center', 'justify-between', 'border-b', 'border-gray-100');
+                    item.classList.remove('flex-col', 'items-start', 'border', 'border-gray-100', 'rounded-xl', 'shadow-sm', 'h-40', 'justify-between');
+                });
+            }
+        }
+
+        // FAB Toggle Logic
+        function toggleFab() {
+            const fabMain = document.getElementById('fab-main');
+            const fabOptions = document.getElementById('fab-options');
+
+            fabMain.classList.toggle('fab-active');
+            fabOptions.classList.toggle('open');
+        }
+
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            const myDocsBtn = document.getElementById('tab-my-docs');
+            const pendingBtn = document.getElementById('tab-pending');
+            const myDocsView = document.getElementById('view-my-docs');
+            const pendingView = document.getElementById('view-pending');
+            const breadcrumbs = document.getElementById('breadcrumbs');
+
+            if (tabName === 'my-docs') {
+                // Update Buttons
+                myDocsBtn.classList.remove('tab-inactive');
+                myDocsBtn.classList.add('tab-active');
+                pendingBtn.classList.remove('tab-active');
+                pendingBtn.classList.add('tab-inactive');
+
+                // Update Views
+                myDocsView.classList.remove('hidden');
+                pendingView.classList.add('hidden');
+                breadcrumbs.classList.remove('hidden'); // Show breadcrumbs in My Docs
+            } else {
+                // Update Buttons
+                pendingBtn.classList.remove('tab-inactive');
+                pendingBtn.classList.add('tab-active');
+                myDocsBtn.classList.remove('tab-active');
+                myDocsBtn.classList.add('tab-inactive');
+
+                // Update Views
+                pendingView.classList.remove('hidden');
+                myDocsView.classList.add('hidden');
+                breadcrumbs.classList.add('hidden'); // Hide breadcrumbs in Pending
+            }
+        }
+
+        function toggleSheet(fileName) {
+            const isClosed = sheet.classList.contains('translate-y-full');
+
+            if (fileName) {
+                title.innerText = fileName;
+            }
+
+            if (isClosed) {
+                sheet.classList.remove('translate-y-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            } else {
+                sheet.classList.add('translate-y-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        actionBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent row click
+                const container = e.target.closest('.doc-item'); // Found parent
+                const nameEl = container.querySelector('.filename');
+                const name = nameEl ? nameEl.innerText : 'Document';
+                toggleSheet(name);
+            });
+        });
+
+        overlay.addEventListener('click', () => toggleSheet());
+        cancelBtn.addEventListener('click', () => toggleSheet());
+
+    </script>
+</body>
+
+</html>

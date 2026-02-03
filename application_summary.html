@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Summary - Corporate Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                            accent: '#CA8A04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Timeline specific styles inspired by user image */
+        .timeline-step {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 1rem;
+            top: 2rem;
+            bottom: 0;
+            width: 3px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .timeline-step:last-child .timeline-line {
+            display: none;
+        }
+
+        .timeline-dot {
+            position: relative;
+            z-index: 2;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dot-completed {
+            background: #334155;
+            color: white;
+        }
+
+        .dot-active {
+            background: #06b6d4;
+            color: white;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .dot-pending {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen pb-10">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
+        <div class="px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="home.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
+                <div>
+                    <h1 class="ml-2 text-lg font-bold text-gray-900 leading-none">Application Summary</h1>
+                    <span
+                        class="ml-2 text-[10px] text-gray-400 font-bold uppercase tracking-widest">APP-2026-4821</span>
+                </div>
+            </div>
+            <span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase">In
+                Progress</span>
+        </div>
+    </header>
+
+    <main class="p-6 space-y-8">
+
+        <!-- Process Timeline Section -->
+        <section class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-6">Process Status</h2>
+            <div class="space-y-0">
+
+                <!-- Step 1: Initiated -->
+                <div class="timeline-step">
+                    <div class="timeline-line"></div>
+                    <div class="flex items-start space-x-4">
+                        <div class="timeline-dot dot-completed">1</div>
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-900">Initiated</h3>
+                            <p class="text-[11px] text-gray-500">By Mr. Anderson (IT Ops)</p>
+                            <p class="text-[9px] text-gray-400 mt-0.5">Feb 02, 2026 - 10:45 AM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: HOD Approval -->
+                <div class="timeline-step">
+                    <div class="timeline-line"></div>
+                    <div class="flex items-start space-x-4">
+                        <div class="timeline-dot dot-active">2</div>
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-900">Department Head Review</h3>
+                            <p class="text-[11px] text-gray-500">Currently with Ms. Sarah Jenkins</p>
+                            <p class="text-[9px] text-indigo-500 font-bold mt-1 uppercase tracking-tighter">Waiting for
+                                Approval</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Finance -->
+                <div class="timeline-step">
+                    <div class="timeline-line"></div>
+                    <div class="flex items-start space-x-4">
+                        <div class="timeline-dot dot-pending">3</div>
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-400">Finance Verification</h3>
+                            <p class="text-[11px] text-gray-400">Next Step</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Final -->
+                <div class="timeline-step">
+                    <div class="flex items-start space-x-4">
+                        <div class="timeline-dot dot-pending">4</div>
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-400">Final Approval</h3>
+                            <p class="text-[11px] text-gray-400">HR Director</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Documents Section -->
+        <section class="space-y-3">
+            <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-1">Documents & Files</h2>
+            <div class="grid grid-cols-1 gap-2">
+                <!-- File 1 -->
+                <div
+                    class="bg-white p-3 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between group cursor-pointer hover:border-brand-900 transition-colors">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-red-50 text-red-500 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-800">Application_Main.pdf</h4>
+                            <p class="text-[9px] text-gray-400">Generated System File</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-300 group-hover:text-brand-900"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comments & Queries Section -->
+        <section class="space-y-4">
+            <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-1">Comments & Queries</h2>
+
+            <div class="space-y-4">
+
+                <!-- Comment Item (Parent) -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-bold text-gray-900">Ms. Sarah Jenkins</span>
+                            <span class="text-[9px] text-gray-400">Feb 02, 11:30 AM</span>
+                        </div>
+                        <span
+                            class="px-2 py-0.5 bg-amber-50 text-amber-600 text-[8px] font-bold rounded uppercase">Query</span>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed">Please provide the supporting documentation for the
+                        travel expenses listed in section 3.</p>
+
+                    <!-- Reply (Linear/Indented) -->
+                    <div class="mt-4 pl-4 border-l-2 border-gray-100 space-y-3">
+                        <div class="bg-gray-50/50 p-3 rounded-xl">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-[10px] font-bold text-gray-900">Mr. Anderson</span>
+                                <span class="text-[9px] text-gray-400">Feb 02, 12:15 PM</span>
+                            </div>
+                            <p class="text-xs text-gray-600 italic">"I have attached the 'Receipts_Pack.pdf' in the
+                                documents section above."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comment Item 2 -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <span class="text-xs font-bold text-gray-900">Ms. Sarah Jenkins</span>
+                        <span class="text-[9px] text-gray-400">5 mins ago</span>
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed">Thank you, proceeding with the review.</p>
+                </div>
+
+            </div>
+
+            <!-- Post Comment Box -->
+            <div class="bg-white rounded-2xl p-4 border border-brand-900/10 shadow-lg mt-6">
+                <textarea rows="2" placeholder="Write a comment or reply..."
+                    class="w-full text-xs text-gray-700 outline-none resize-none mb-2"></textarea>
+                <div class="flex justify-end space-x-2">
+                    <button
+                        class="px-4 py-2 bg-gray-100 text-gray-600 text-[10px] font-bold rounded-lg active:scale-95 transition-all">Query</button>
+                    <button
+                        class="px-4 py-2 bg-brand-900 text-white text-[10px] font-bold rounded-lg active:scale-95 transition-all">Comment</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+
+</html>

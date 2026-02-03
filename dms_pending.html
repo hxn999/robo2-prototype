@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Corporate Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                            accent: '#CA8A04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen pb-24">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
+        <div class="px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="dms.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
+                <h1 class="ml-2 text-lg font-bold text-gray-900">Pending Uploads</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="p-4 space-y-4">
+
+    
+
+        <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wide pt-4">Ready to Upload</h2>
+
+        <!-- Pending List -->
+        <div class="space-y-3">
+            <!-- Item 1 -->
+            <div class="bg-white rounded-lg p-3 shadow-sm border border-gray-100 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="h-10 w-10 bg-gray-200 rounded overflow-hidden">
+                        <!-- Placeholder for thumbnail -->
+                        <div class="h-full w-full bg-gray-300 flex items-center justify-center text-gray-500 text-xs">
+                            IMG</div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-900">Scan_Oct12.jpg</h3>
+                        <p class="text-xs text-brand-accent">Pending Metadata</p>
+                    </div>
+                </div>
+                <button class="text-gray-400 hover:text-red-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="bg-white rounded-lg p-3 shadow-sm border border-gray-100 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="h-10 w-10 bg-gray-200 rounded overflow-hidden">
+                        <!-- Placeholder for thumbnail -->
+                        <div class="h-full w-full bg-gray-300 flex items-center justify-center text-gray-500 text-xs">
+                            PDF</div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-900">Invoice_003.pdf</h3>
+                        <p class="text-xs text-brand-accent">Pending Metadata</p>
+                    </div>
+                </div>
+                <button class="text-gray-400 hover:text-red-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Upload Fab -->
+    <div class="fixed bottom-6 right-6">
+        <button
+            class="bg-brand-900 text-white p-4 rounded-full shadow-xl hover:bg-brand-800 transition-transform active:scale-95 flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <span class="font-bold pr-1">Upload All</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

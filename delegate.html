@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delegate - Corporate Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-enter {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .modal-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                            accent: '#CA8A04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen pb-24 relative">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
+        <div class="px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="home.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
+                <h1 class="ml-2 text-lg font-bold text-gray-900">Delegate Authority</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="p-6 space-y-4">
+        <div class="flex items-center justify-between mb-2">
+            <h2 class="text-sm font-bold text-gray-500 uppercase tracking-widest">Active Delegations</h2>
+        </div>
+
+        <!-- Delegation List -->
+        <div id="delegate-list" class="space-y-3">
+            <!-- Empty State (Initially) -->
+            <div id="empty-state"
+                class="bg-white rounded-2xl p-10 border border-dashed border-gray-200 flex flex-col items-center justify-center text-center">
+                <div class="bg-gray-50 p-4 rounded-full mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-gray-900 font-semibold">No delegates found</h3>
+                <p class="text-sm text-gray-500 mt-1">Assign someone to handle your tasks while you're away.</p>
+            </div>
+
+            <!-- Sample Delegation (Hidden by default, shown for demo when adding) -->
+            <div
+                class="delegate-item hidden bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center justify-between transition-all hover:shadow-md">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="h-10 w-10 bg-brand-50 text-brand-900 rounded-full flex items-center justify-center font-bold">
+                        JD
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 name-display">John Doe</h4>
+                        <p class="text-[10px] text-gray-500 date-display">Oct 12, 2025 - Oct 20, 2025</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span
+                        class="px-2 py-0.5 bg-green-50 text-green-600 text-[10px] font-bold rounded-full uppercase">Active</span>
+                    <button class="p-1 text-gray-300 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Delegate FAB -->
+    <div class="fixed bottom-6 right-6 z-30">
+        <button onclick="toggleModal(true)"
+            class="bg-brand-900 text-white p-4 rounded-2xl shadow-xl hover:bg-brand-800 active:scale-95 transition-all flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <span class="font-bold pr-1">Add Delegate</span>
+        </button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300">
+    </div>
+
+    <!-- Add Delegate Modal -->
+    <div id="delegate-modal"
+        class="fixed inset-x-6 top-1/2 -translate-y-1/2 bg-white rounded-2xl z-50 transform scale-95 opacity-0 pointer-events-none transition-all duration-300 p-6 shadow-2xl max-w-sm mx-auto">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Assign New Delegate</h3>
+
+        <form id="delegate-form" class="space-y-4">
+            <!-- User Selection -->
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-tighter mb-1">Select User</label>
+                <select id="user-select"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-900 focus:border-transparent outline-none transition-all">
+                    <option value="">Choose a colleague...</option>
+                    <option value="John Doe">John Doe</option>
+                    <option value="Jane Smith">Jane Smith</option>
+                    <option value="Michael Scott">Michael Scott</option>
+                    <option value="Pam Beesly">Pam Beesly</option>
+                </select>
+            </div>
+
+            <!-- Date Range -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-tighter mb-1">Start
+                        Date</label>
+                    <input type="date" id="start-date"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-900 focus:border-transparent outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-tighter mb-1">End
+                        Date</label>
+                    <input type="date" id="end-date"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-900 focus:border-transparent outline-none transition-all">
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="flex space-x-3 pt-4">
+                <button type="button" onclick="toggleModal(false)"
+                    class="flex-1 py-3 px-4 rounded-xl text-sm font-bold text-gray-500 hover:bg-gray-100 transition-colors">
+                    Cancel
+                </button>
+                <button type="submit"
+                    class="flex-1 py-3 px-4 bg-brand-900 text-white rounded-xl text-sm font-bold hover:bg-brand-800 transition-all active:scale-95 shadow-lg shadow-brand-900/20">
+                    Grand Access
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const modal = document.getElementById('delegate-modal');
+        const overlay = document.getElementById('modal-overlay');
+        const form = document.getElementById('delegate-form');
+        const emptyState = document.getElementById('empty-state');
+        const list = document.getElementById('delegate-list');
+
+        function toggleModal(show) {
+            if (show) {
+                overlay.classList.remove('hidden');
+                modal.classList.remove('pointer-events-none');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    modal.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            } else {
+                overlay.classList.add('opacity-0');
+                modal.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('pointer-events-none');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const user = document.getElementById('user-select').value;
+            const start = document.getElementById('start-date').value;
+            const end = document.getElementById('end-date').value;
+
+            if (!user || !start || !end) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            // Mock adding to list
+            emptyState.classList.add('hidden');
+
+            const newItem = document.querySelector('.delegate-item').cloneNode(true);
+            newItem.classList.remove('hidden');
+            newItem.querySelector('.name-display').innerText = user;
+            newItem.querySelector('.date-display').innerText = `${start} - ${end}`;
+            newItem.querySelector('.h-10').innerText = user.split(' ').map(n => n[0]).join('');
+
+            list.appendChild(newItem);
+
+            toggleModal(false);
+            form.reset();
+        });
+
+        overlay.addEventListener('click', () => toggleModal(false));
+    </script>
+</body>
+
+</html>

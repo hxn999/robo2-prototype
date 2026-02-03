@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests - Corporate Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Hide scrollbar for horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                            accent: '#CA8A04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
+        <div class="px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="workflow_dashboard.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
+                <h1 class="ml-2 text-lg font-bold text-gray-900">Pending Approvals</h1>
+            </div>
+            <button class="p-2 text-gray-400 hover:text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Scrollable Tabs -->
+        <div class="flex overflow-x-auto no-scrollbar px-4 pb-2 space-x-2">
+            <button
+                class="flex-shrink-0 px-4 py-1.5 bg-brand-900 text-white rounded-full text-xs font-medium shadow-sm">All
+                (12)</button>
+            <button
+                class="flex-shrink-0 px-4 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:bg-gray-50">Expense
+                (5)</button>
+            <button
+                class="flex-shrink-0 px-4 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:bg-gray-50">Leave
+                (3)</button>
+            <button
+                class="flex-shrink-0 px-4 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:bg-gray-50">Purchase
+                (4)</button>
+        </div>
+    </header>
+
+    <main class="p-4 space-y-4">
+
+        <!-- List Item 1 -->
+        <a href="workflow_detail.html"
+            class="block bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow active:scale-[0.99]">
+            <div class="flex justify-between items-start mb-2">
+                <span
+                    class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-800">
+                    Expense Claim
+                </span>
+                <span class="text-xs text-gray-400">2 hrs ago</span>
+            </div>
+            <h3 class="text-sm font-bold text-gray-900 mb-1">Monthly Travel Expenses - Jan</h3>
+            <div class="flex items-center justify-between mt-3">
+                <div class="flex items-center space-x-2">
+                    <img class="h-6 w-6 rounded-full bg-gray-200"
+                        src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="">
+                    <span class="text-xs text-gray-500 font-medium">John Doe</span>
+                </div>
+                <span class="text-sm font-bold text-gray-900">$1,250.00</span>
+            </div>
+        </a>
+
+        <!-- List Item 2 (Overdue) -->
+        <a href="workflow_detail.html"
+            class="block bg-white rounded-xl p-4 shadow-sm border border-l-4 border-l-red-500 hover:shadow-md transition-shadow active:scale-[0.99]">
+            <div class="flex justify-between items-start mb-2">
+                <span
+                    class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-purple-100 text-purple-800">
+                    Purchase Order
+                </span>
+                <span class="text-xs text-red-500 font-bold">Overdue (2 Days)</span>
+            </div>
+            <h3 class="text-sm font-bold text-gray-900 mb-1">Q1 Server Upgrades PO#9921</h3>
+            <div class="flex items-center justify-between mt-3">
+                <div class="flex items-center space-x-2">
+                    <img class="h-6 w-6 rounded-full bg-gray-200"
+                        src="https://ui-avatars.com/api/?name=Sarah+Smith&background=random" alt="">
+                    <span class="text-xs text-gray-500 font-medium">Sarah Smith</span>
+                </div>
+                <span class="text-sm font-bold text-gray-900">$15,400.00</span>
+            </div>
+        </a>
+
+        <!-- List Item 3 -->
+        <a href="workflow_detail.html"
+            class="block bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow active:scale-[0.99]">
+            <div class="flex justify-between items-start mb-2">
+                <span
+                    class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-800">
+                    Leave Request
+                </span>
+                <span class="text-xs text-gray-400">Yesterday</span>
+            </div>
+            <h3 class="text-sm font-bold text-gray-900 mb-1">Annual Leave - 5 Days</h3>
+            <div class="flex items-center justify-between mt-3">
+                <div class="flex items-center space-x-2">
+                    <img class="h-6 w-6 rounded-full bg-gray-200"
+                        src="https://ui-avatars.com/api/?name=Mike+Ross&background=random" alt="">
+                    <span class="text-xs text-gray-500 font-medium">Mike Ross</span>
+                </div>
+                <span class="text-xs text-gray-400">Oct 12 - Oct 17</span>
+            </div>
+        </a>
+
+        <!-- List Item 4 -->
+        <a href="workflow_detail.html"
+            class="block bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow active:scale-[0.99]">
+            <div class="flex justify-between items-start mb-2">
+                <span
+                    class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-800">
+                    Expense Claim
+                </span>
+                <span class="text-xs text-gray-400">Yesterday</span>
+            </div>
+            <h3 class="text-sm font-bold text-gray-900 mb-1">Client Dinner - Project X</h3>
+            <div class="flex items-center justify-between mt-3">
+                <div class="flex items-center space-x-2">
+                    <img class="h-6 w-6 rounded-full bg-gray-200"
+                        src="https://ui-avatars.com/api/?name=Alice+Wonder&background=random" alt="">
+                    <span class="text-xs text-gray-500 font-medium">Alice Wonder</span>
+                </div>
+                <span class="text-sm font-bold text-gray-900">$340.50</span>
+            </div>
+        </a>
+
+    </main>
+
+</body>
+
+</html>
