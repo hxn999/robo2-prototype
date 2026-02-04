@@ -66,66 +66,84 @@
 <body class="bg-gray-50 min-h-screen pb-24 relative">
 
     <!-- Header -->
-    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
-        <div class="px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center">
-                <a href="home.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
+    <header class="bg-white shadow-sm sticky top-0 z-20 w-full transition-transform duration-300" id="header">
+        <div class="px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- Hamburger Menu Trigger -->
+                <button id="menu-btn" class="-ml-2 p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </a>
-                <h1 class="ml-2 text-lg font-bold text-gray-900">DMS</h1>
-            </div>
-
-            <div class="flex items-center space-x-1">
-                <!-- View Toggle (List/Grid) -->
-                <button id="view-toggle" onclick="toggleView()" class="p-2 text-gray-500 hover:text-gray-900">
-                    <svg id="icon-grid" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                    </svg>
-                    <svg id="icon-list" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
+                <h1 class="text-lg font-bold text-gray-900 leading-tight">DMS</h1>
+            </div>
 
-                <!-- Search Icon -->
-                <button class="p-2 text-gray-500 hover:text-gray-900">
+            <div class="flex items-center space-x-2">
+                <!-- View Toggle (List/Grid) -->
+                <div class="flex items-center bg-gray-100 p-1 rounded-xl mr-2">
+                    <button id="btn-grid" onclick="setView('grid')" class="p-2 rounded-lg transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                    </button>
+                    <button id="btn-list" onclick="setView('list')"
+                        class="p-2 rounded-lg bg-white shadow-sm transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Search Button -->
+                <button class="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </button>
+
+                <!-- Notifications Button -->
+                <a href="notifications.html" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 border border-white"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </a>
             </div>
         </div>
+    </header>
 
-        <!-- Tab Navigation -->
-        <div class="flex border-b border-gray-200 bg-white px-2">
-            <button id="tab-my-docs" onclick="switchTab('my-docs')"
-                class="flex-1 py-3 text-sm text-center tab-active transition-colors">
-                My Document
-            </button>
-            <button id="tab-pending" onclick="switchTab('pending')"
-                class="flex-1 py-3 text-sm text-center tab-inactive transition-colors">
-                Pending Document
-            </button>
-        </div>
+    <!-- Tab Navigation -->
+    <div class="flex border-b border-gray-200 bg-white px-2">
+        <button id="tab-my-docs" onclick="switchTab('my-docs')"
+            class="flex-1 py-3 text-sm text-center tab-active transition-colors">
+            My Document
+        </button>
+        <button id="tab-pending" onclick="switchTab('pending')"
+            class="flex-1 py-3 text-sm text-center tab-inactive transition-colors">
+            Pending Document
+        </button>
+    </div>
 
-        <!-- Breadcrumbs (Only relevant for My Docs usually, but keeping global for now) -->
-        <div id="breadcrumbs"
-            class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs text-gray-500 flex items-center space-x-1">
-            <span class="hover:underline cursor-pointer">Root</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-300" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-            <span class="font-medium text-gray-900">Corporate Polic...</span>
-        </div>
+    <!-- Breadcrumbs (Only relevant for My Docs usually, but keeping global for now) -->
+    <div id="breadcrumbs"
+        class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs text-gray-500 flex items-center space-x-1">
+        <span class="hover:underline cursor-pointer">Root</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-gray-300" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="font-medium text-gray-900">Corporate Polic...</span>
+    </div>
     </header>
 
     <main class="text-sm">
@@ -361,51 +379,183 @@
         </div>
     </div>
 
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden opacity-0 transition-opacity duration-300">
+    </div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+        class="fixed top-0 left-0 bottom-0 w-72 bg-white z-40 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <!-- Sidebar Header: Profile -->
+        <div class="p-6 border-b border-gray-100 bg-gray-50/50">
+            <div class="flex items-center space-x-3 mb-4">
+                <div
+                    class="h-12 w-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=random" alt="User Profile"
+                        class="h-full w-full object-cover">
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold text-gray-900">Mr. Anderson</h2>
+                    <p class="text-xs text-gray-500">Administrator</p>
+                </div>
+            </div>
+            <a href="profile_edit.html"
+                class="w-full py-2 px-3 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Edit Profile
+            </a>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <div class="flex-1 overflow-y-auto py-4">
+            <nav class="space-y-1 px-3">
+                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 mt-4">Main</p>
+                <a href="home.html"
+                    class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Home
+                </a>
+
+                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 mt-6">Workflow</p>
+                <a href="workflow_dashboard.html"
+                    class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    Workflow Dashboard
+                </a>
+                <a href="workflow_list.html?filter=pending"
+                    class="flex items-center px-6 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent mr-3"></span>
+                    Pending Approvals
+                </a>
+                <a href="workflow_list.html?filter=overdue"
+                    class="flex items-center px-6 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-3"></span>
+                    Overdue Tasks
+                </a>
+
+                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 mt-6">Documents</p>
+                <a href="dms.html"
+                    class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg bg-brand-50 text-brand-900 group transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-brand-900" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                    </svg>
+                    DMS Explorer
+                </a>
+
+                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 mt-6">Management</p>
+                <a href="delegate.html"
+                    class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    Delegate Authority
+                </a>
+            </nav>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-gray-100 bg-gray-50">
+            <a href="#"
+                class="flex items-center px-3 py-2 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors mb-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Watch Tutorial
+            </a>
+            <a href="system_info.html"
+                class="flex items-center px-3 py-2 text-[10px] font-bold text-gray-400 hover:text-gray-600 transition-colors mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                System Information
+            </a>
+
+            <div class="px-3">
+                <p class="text-[10px] text-gray-400 font-medium">System v2.4.0</p>
+                <div class="mt-3">
+                    <a href="index.html"
+                        class="flex items-center text-xs font-medium text-red-500 hover:text-red-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
     <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
         const actionBtns = document.querySelectorAll('.action-btn');
         const sheet = document.getElementById('action-sheet');
-        const overlay = document.getElementById('action-overlay');
+        const actionOverlay = document.getElementById('action-overlay');
         const cancelBtn = document.getElementById('cancel-btn');
         const title = document.getElementById('selected-file-name');
 
-        let isGridView = false;
+        function toggleSidebar() {
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('hidden');
+                setTimeout(() => sidebarOverlay.classList.remove('opacity-0'), 10);
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebarOverlay.classList.add('opacity-0');
+                setTimeout(() => sidebarOverlay.classList.add('hidden'), 300);
+            }
+        }
 
-        // View Toggle Logic
-        function toggleView() {
-            isGridView = !isGridView;
+        menuBtn.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        function setView(viewType) {
             const container = document.getElementById('view-my-docs');
-            const iconGrid = document.getElementById('icon-grid');
-            const iconList = document.getElementById('icon-list');
+            const btnGrid = document.getElementById('btn-grid');
+            const btnList = document.getElementById('btn-list');
             const items = document.querySelectorAll('.doc-item');
 
-            if (isGridView) {
-                // Switch to Grid
-                // Container: grid grid-cols-2 gap-4
+            if (viewType === 'grid') {
                 container.classList.remove('flex', 'flex-col');
                 container.classList.add('grid', 'grid-cols-2', 'gap-4', 'p-4');
-
-                // Show List Icon (to switch back)
-                iconGrid.classList.add('hidden');
-                iconList.classList.remove('hidden');
-
-                // Update Items for Grid
+                btnGrid.classList.add('bg-white', 'shadow-sm');
+                btnList.classList.remove('bg-white', 'shadow-sm');
                 items.forEach(item => {
                     item.classList.remove('flex', 'items-center', 'justify-between', 'border-b', 'border-gray-100');
                     item.classList.add('flex-col', 'items-start', 'border', 'border-gray-100', 'rounded-xl', 'shadow-sm', 'h-40', 'justify-between');
-
-                    // Adjust internal layout if needed (simplistic approach here)
                 });
             } else {
-                // Switch to List
-                // Container: flex flex-col
                 container.classList.add('flex', 'flex-col');
                 container.classList.remove('grid', 'grid-cols-2', 'gap-4', 'p-4');
-
-                // Show Grid Icon (to switch to grid)
-                iconList.classList.add('hidden');
-                iconGrid.classList.remove('hidden');
-
-                // Update Items for List
+                btnList.classList.add('bg-white', 'shadow-sm');
+                btnGrid.classList.remove('bg-white', 'shadow-sm');
                 items.forEach(item => {
                     item.classList.add('flex', 'items-center', 'justify-between', 'border-b', 'border-gray-100');
                     item.classList.remove('flex-col', 'items-start', 'border', 'border-gray-100', 'rounded-xl', 'shadow-sm', 'h-40', 'justify-between');
@@ -417,7 +567,6 @@
         function toggleFab() {
             const fabMain = document.getElementById('fab-main');
             const fabOptions = document.getElementById('fab-options');
-
             fabMain.classList.toggle('fab-active');
             fabOptions.classList.toggle('open');
         }
@@ -431,61 +580,50 @@
             const breadcrumbs = document.getElementById('breadcrumbs');
 
             if (tabName === 'my-docs') {
-                // Update Buttons
                 myDocsBtn.classList.remove('tab-inactive');
                 myDocsBtn.classList.add('tab-active');
                 pendingBtn.classList.remove('tab-active');
                 pendingBtn.classList.add('tab-inactive');
-
-                // Update Views
                 myDocsView.classList.remove('hidden');
                 pendingView.classList.add('hidden');
-                breadcrumbs.classList.remove('hidden'); // Show breadcrumbs in My Docs
+                breadcrumbs.classList.remove('hidden');
             } else {
-                // Update Buttons
                 pendingBtn.classList.remove('tab-inactive');
                 pendingBtn.classList.add('tab-active');
                 myDocsBtn.classList.remove('tab-active');
                 myDocsBtn.classList.add('tab-inactive');
-
-                // Update Views
                 pendingView.classList.remove('hidden');
                 myDocsView.classList.add('hidden');
-                breadcrumbs.classList.add('hidden'); // Hide breadcrumbs in Pending
+                breadcrumbs.classList.add('hidden');
             }
         }
 
         function toggleSheet(fileName) {
             const isClosed = sheet.classList.contains('translate-y-full');
-
-            if (fileName) {
-                title.innerText = fileName;
-            }
-
+            if (fileName) title.innerText = fileName;
             if (isClosed) {
                 sheet.classList.remove('translate-y-full');
-                overlay.classList.remove('hidden');
-                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                actionOverlay.classList.remove('hidden');
+                setTimeout(() => actionOverlay.classList.remove('opacity-0'), 10);
             } else {
                 sheet.classList.add('translate-y-full');
-                overlay.classList.add('opacity-0');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
+                actionOverlay.classList.add('opacity-0');
+                setTimeout(() => actionOverlay.classList.add('hidden'), 300);
             }
         }
 
         actionBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent row click
-                const container = e.target.closest('.doc-item'); // Found parent
+                e.stopPropagation();
+                const container = e.target.closest('.doc-item');
                 const nameEl = container.querySelector('.filename');
                 const name = nameEl ? nameEl.innerText : 'Document';
                 toggleSheet(name);
             });
         });
 
-        overlay.addEventListener('click', () => toggleSheet());
+        actionOverlay.addEventListener('click', () => toggleSheet());
         cancelBtn.addEventListener('click', () => toggleSheet());
-
     </script>
 </body>
 

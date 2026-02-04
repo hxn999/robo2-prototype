@@ -28,30 +28,55 @@
 
 <body class="bg-gray-50 min-h-screen pb-10">
 
+
     <!-- Header -->
-    <header class="bg-white sticky top-0 z-20 shadow-sm border-b border-gray-100">
-        <div class="px-4 py-4 flex items-center">
-            <a href="home.html" class="p-2 -ml-2 text-gray-500 hover:text-gray-900 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </a>
-            <h1 class="ml-2 text-lg font-bold text-gray-900">Choose Application Type</h1>
+    <header class="bg-white shadow-sm sticky top-0 z-20 w-full transition-transform duration-300" id="header">
+        <div class="px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- Hamburger Menu Trigger -->
+                <button id="menu-btn" class="-ml-2 p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <h1 class="text-lg font-bold text-gray-900 leading-tight">New Application</h1>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <!-- Search Button -->
+                <button class="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+
+                <!-- Notifications Button -->
+                <a href="notifications.html" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 border border-white"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </a>
+            </div>
         </div>
     </header>
 
     <main class="p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-            <!-- Application Item 1 -->
+            <!-- Application items remain same -->
             <a href="application_form.html?type=Leave%20Request"
                 class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
                 <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-100 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z" />
                     </svg>
                 </div>
                 <div>
@@ -59,8 +84,6 @@
                     <p class="text-xs text-gray-500 mt-0.5">Annual, Sick, or Casual leave applications.</p>
                 </div>
             </a>
-
-            <!-- Application Item 2 -->
             <a href="application_form.html?type=Expense%20Reimbursement"
                 class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
                 <div class="p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-100 transition-colors">
@@ -75,8 +98,6 @@
                     <p class="text-xs text-gray-500 mt-0.5">Travel, medical, or other professional expenses.</p>
                 </div>
             </a>
-
-            <!-- Application Item 3 -->
             <a href="application_form.html?type=IT%20Service%20Request"
                 class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
                 <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-100 transition-colors">
@@ -92,8 +113,6 @@
                     <p class="text-xs text-gray-500 mt-0.5">Software installation, hardware issues, or access.</p>
                 </div>
             </a>
-
-            <!-- Application Item 4 -->
             <a href="application_form.html?type=Stationery%20Indent"
                 class="group bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center space-x-4">
                 <div class="p-3 bg-amber-50 text-amber-600 rounded-xl group-hover:bg-amber-100 transition-colors">
@@ -109,9 +128,123 @@
                     <p class="text-xs text-gray-500 mt-0.5">Request for office supplies and materials.</p>
                 </div>
             </a>
-
         </div>
     </main>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden opacity-0 transition-opacity duration-300">
+    </div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+        class="fixed top-0 left-0 bottom-0 w-72 bg-white z-40 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <!-- Sidebar Header: Profile -->
+        <div class="p-6 border-b border-gray-100 bg-gray-50/50">
+            <div class="flex items-center space-x-3 mb-4">
+                <div
+                    class="h-12 w-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=random" alt="User Profile"
+                        class="h-full w-full object-cover">
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold text-gray-900">Mr. Anderson</h2>
+                    <p class="text-xs text-gray-500">Administrator</p>
+                </div>
+            </div>
+            <a href="profile_edit.html"
+                class="w-full py-2 px-3 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Edit Profile
+            </a>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-4">
+            <nav class="space-y-1 px-3">
+                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 mt-4">Main</p>
+                <a href="home.html"
+                    class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Home
+                </a>
+
+                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 mt-6">Workflow</p>
+                <a href="workflow_dashboard.html"
+                    class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    Workflow Dashboard
+                </a>
+
+                <p class="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 mt-6">Documents</p>
+                <a href="dms.html"
+                    class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 hover:text-gray-900 group transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                    </svg>
+                    DMS Explorer
+                </a>
+            </nav>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-gray-100 bg-gray-50">
+            <a href="system_info.html"
+                class="flex items-center px-3 py-2 text-[10px] font-bold text-gray-400 hover:text-gray-600 transition-colors mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                System Information
+            </a>
+            <div class="px-3">
+                <a href="index.html"
+                    class="flex items-center text-xs font-medium text-red-500 hover:text-red-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('hidden');
+                setTimeout(() => sidebarOverlay.classList.remove('opacity-0'), 10);
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebarOverlay.classList.add('opacity-0');
+                setTimeout(() => sidebarOverlay.classList.add('hidden'), 300);
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+    </script>
 
 </body>
 
