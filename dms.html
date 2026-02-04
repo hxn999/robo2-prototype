@@ -43,6 +43,12 @@
         .fab-active .fab-icon {
             transform: rotate(45deg);
         }
+
+        /* Selection classes */
+        .doc-selected {
+            background-color: #eff6ff;
+            border-color: #bfdbfe;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -234,22 +240,59 @@
             <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wide pt-2">Ready to Upload</h2>
 
             <!-- Pending List -->
-            <div class="space-y-3">
+            <div class="space-y-3" id="pending-list">
                 <!-- Item 1 -->
-                <div class="bg-white rounded-lg p-3 shadow-sm border border-gray-100 flex items-center justify-between">
+                <div class="pending-item bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center justify-between transition-all cursor-pointer hover:border-blue-200"
+                    onclick="toggleItemSelection(this)">
                     <div class="flex items-center space-x-3">
-                        <div class="h-10 w-10 bg-gray-200 rounded overflow-hidden">
-                            <!-- Placeholder for thumbnail -->
+                        <div class="flex-shrink-0">
+                            <input type="checkbox"
+                                class="pending-checkbox h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                onclick="event.stopPropagation(); updateSelectionState()">
+                        </div>
+                        <div
+                            class="h-12 w-12 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
                             <div
-                                class="h-full w-full bg-gray-300 flex items-center justify-center text-gray-500 text-xs">
+                                class="h-full w-full bg-blue-50 flex items-center justify-center text-blue-400 font-bold text-xs uppercase">
                                 IMG</div>
                         </div>
                         <div>
-                            <h3 class="text-sm font-medium text-gray-900">Scan_Oct12.jpg</h3>
-                            <p class="text-xs text-brand-accent">Pending Metadata</p>
+                            <h3 class="text-sm font-bold text-gray-900">Scan_Oct12.jpg</h3>
+                            <p class="text-xs text-brand-accent font-medium mt-0.5">Pending Metadata</p>
                         </div>
                     </div>
-                    <button class="text-gray-400 hover:text-red-500 transition-colors">
+                    <button class="text-gray-300 hover:text-red-500 transition-colors p-2"
+                        onclick="event.stopPropagation(); this.closest('.pending-item').remove(); updateSelectionState()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="pending-item bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center justify-between transition-all cursor-pointer hover:border-blue-200"
+                    onclick="toggleItemSelection(this)">
+                    <div class="flex items-center space-x-3">
+                        <div class="flex-shrink-0">
+                            <input type="checkbox"
+                                class="pending-checkbox h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                onclick="event.stopPropagation(); updateSelectionState()">
+                        </div>
+                        <div
+                            class="h-12 w-12 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
+                            <div
+                                class="h-full w-full bg-orange-50 flex items-center justify-center text-orange-400 font-bold text-xs uppercase">
+                                PDF</div>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-900">Invoice_4592.pdf</h3>
+                            <p class="text-xs text-brand-accent font-medium mt-0.5">Ready to Review</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-300 hover:text-red-500 transition-colors p-2"
+                        onclick="event.stopPropagation(); this.closest('.pending-item').remove(); updateSelectionState()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -308,15 +351,59 @@
                     </svg>
                 </button>
             </div>
-
         </div>
 
-        <!-- Main FAB -->
+        <!-- Pending Tab Menu Options (Three Dots) -->
+        <div id="pending-options" class="fab-options flex flex-col space-y-3 items-end pr-1 transition-all">
+            <div class="flex items-center space-x-1 bg-white px-3 py-1.5 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 active:scale-95 transition-all"
+                onclick="selectAllPending()">
+                <span class="text-sm font-semibold text-gray-700">Select All</span>
+                <div class="bg-white text-blue-900 flex items-center justify-center p-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main FAB (Standard Add) -->
         <button id="fab-main" onclick="toggleFab()"
             class="bg-brand-900 text-white p-4 rounded-2xl shadow-xl hover:bg-brand-800 active:scale-95 transition-all outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 fab-icon" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+        </button>
+
+        <!-- Pending Tab FAB (Three Dots) -->
+        <button id="fab-pending" onclick="togglePendingFab()"
+            class="hidden bg-white text-gray-700 p-4 rounded-2xl shadow-xl hover:bg-gray-50 active:scale-95 transition-all border border-gray-100 outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+            </svg>
+        </button>
+
+        <!-- Bulk Action: Approve -->
+        <button id="fab-approve" onclick="approveSelected()"
+            class="hidden bg-white text-green-600 p-4 rounded-2xl shadow-xl hover:bg-green-50 active:scale-95 transition-all border border-green-100 outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </button>
+
+        <!-- Bulk Action: Delete -->
+        <button id="fab-delete" onclick="deleteSelected()"
+            class="hidden bg-white text-red-600 p-4 rounded-2xl shadow-xl hover:bg-red-50 active:scale-95 transition-all border border-red-100 outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
         </button>
     </div>
@@ -571,6 +658,12 @@
             fabOptions.classList.toggle('open');
         }
 
+        function togglePendingFab() {
+            const fabPending = document.getElementById('fab-pending');
+            const pendingOptions = document.getElementById('pending-options');
+            pendingOptions.classList.toggle('open');
+        }
+
         // Tab Switching Logic
         function switchTab(tabName) {
             const myDocsBtn = document.getElementById('tab-my-docs');
@@ -578,6 +671,13 @@
             const myDocsView = document.getElementById('view-my-docs');
             const pendingView = document.getElementById('view-pending');
             const breadcrumbs = document.getElementById('breadcrumbs');
+            const fabMain = document.getElementById('fab-main');
+            const fabPending = document.getElementById('fab-pending');
+            const fabOptions = document.getElementById('fab-options');
+            const pendingOptions = document.getElementById('pending-options');
+
+            // Reset selections when switching
+            clearSelections();
 
             if (tabName === 'my-docs') {
                 myDocsBtn.classList.remove('tab-inactive');
@@ -587,6 +687,12 @@
                 myDocsView.classList.remove('hidden');
                 pendingView.classList.add('hidden');
                 breadcrumbs.classList.remove('hidden');
+
+                // Toggle FABs
+                fabMain.classList.remove('hidden');
+                fabPending.classList.add('hidden');
+                pendingOptions.classList.add('hidden');
+                pendingOptions.classList.remove('open');
             } else {
                 pendingBtn.classList.remove('tab-inactive');
                 pendingBtn.classList.add('tab-active');
@@ -595,6 +701,78 @@
                 pendingView.classList.remove('hidden');
                 myDocsView.classList.add('hidden');
                 breadcrumbs.classList.add('hidden');
+
+                // Toggle FABs
+                fabMain.classList.add('hidden');
+                fabOptions.classList.remove('open');
+                fabPending.classList.remove('hidden');
+            }
+        }
+
+        // Multi-select Logic
+        function toggleItemSelection(element) {
+            const checkbox = element.querySelector('.pending-checkbox');
+            checkbox.checked = !checkbox.checked;
+            updateSelectionState();
+        }
+
+        function updateSelectionState() {
+            const items = document.querySelectorAll('.pending-item');
+            let selectedCount = 0;
+
+            items.forEach(item => {
+                const checkbox = item.querySelector('.pending-checkbox');
+                if (checkbox.checked) {
+                    item.classList.add('doc-selected');
+                    selectedCount++;
+                } else {
+                    item.classList.remove('doc-selected');
+                }
+            });
+
+            const fabPending = document.getElementById('fab-pending');
+            const fabApprove = document.getElementById('fab-approve');
+            const fabDelete = document.getElementById('fab-delete');
+            const pendingOptions = document.getElementById('pending-options');
+
+            if (selectedCount > 0) {
+                fabPending.classList.add('hidden');
+                pendingOptions.classList.add('hidden');
+                pendingOptions.classList.remove('open');
+                fabApprove.classList.remove('hidden');
+                fabDelete.classList.remove('hidden');
+            } else {
+                fabPending.classList.remove('hidden');
+                fabApprove.classList.add('hidden');
+                fabDelete.classList.add('hidden');
+            }
+        }
+
+        function selectAllPending() {
+            const checkboxes = document.querySelectorAll('.pending-checkbox');
+            checkboxes.forEach(cb => cb.checked = true);
+            updateSelectionState();
+        }
+
+        function clearSelections() {
+            const checkboxes = document.querySelectorAll('.pending-checkbox');
+            checkboxes.forEach(cb => cb.checked = false);
+            updateSelectionState();
+        }
+
+        function approveSelected() {
+            const selectedItems = document.querySelectorAll('.pending-item.doc-selected');
+            if (confirm(`Approve ${selectedItems.length} documents?`)) {
+                selectedItems.forEach(item => item.remove());
+                updateSelectionState();
+            }
+        }
+
+        function deleteSelected() {
+            const selectedItems = document.querySelectorAll('.pending-item.doc-selected');
+            if (confirm(`Delete ${selectedItems.length} documents?`)) {
+                selectedItems.forEach(item => item.remove());
+                updateSelectionState();
             }
         }
 
